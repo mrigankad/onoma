@@ -1,0 +1,32 @@
+[project]
+name = "onoma"
+version = "0.1.0"
+description = "Open-source search with a shared, editable vocabulary: find things by what they mean, not what they are called."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+  "openpyxl>=3.1",
+  "rapidfuzz>=3.10",
+  "httpx>=0.27",
+  "python-multipart>=0.0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+
+[project.scripts]
+onoma = "onoma.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["onoma"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

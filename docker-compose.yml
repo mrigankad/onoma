@@ -1,0 +1,23 @@
+# docker compose up  ->  engine on :8000, console on :3000
+# Load sample data once:  docker compose exec engine onoma --db /data/onoma.db demo
+services:
+  engine:
+    build: ./engine
+    ports: ["8000:8000"]
+    volumes: ["onoma-data:/data"]
+    environment:
+      ONOMA_CORS: http://localhost:3000
+      # ONOMA_API_KEYS: change-me
+      # ONOMA_MODEL_PROVIDER: ollama
+      # ONOMA_MODEL_NAME: gpt-oss:120b-cloud
+      # ONOMA_MODEL_KEY: ...
+  web:
+    build:
+      context: ./web
+      args:
+        NEXT_PUBLIC_ONOMA_API: http://localhost:8000
+    ports: ["3000:3000"]
+    depends_on: [engine]
+
+volumes:
+  onoma-data:

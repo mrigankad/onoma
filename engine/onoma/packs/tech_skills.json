@@ -1,0 +1,21 @@
+{
+  "name": "Tech skills",
+  "description": "Tools, clouds, frameworks and certification names as people actually write them on CVs and job posts.",
+  "license": "CC-BY-4.0",
+  "entities": [
+    {"label": "Kubernetes", "kind": "skill", "aliases": ["container orchestration", {"term": "EKS", "type": "product"}, {"term": "AKS", "type": "product"}, {"term": "GKE", "type": "product"}, {"term": "CKA", "type": "certification"}]},
+    {"label": "React", "kind": "skill", "aliases": ["react native web", "react hooks"]},
+    {"label": "JavaScript", "kind": "skill", "aliases": [{"term": "JS", "type": "abbr"}, "ECMAScript", "ES6"]},
+    {"label": "TypeScript", "kind": "skill", "aliases": [{"term": "TS", "type": "abbr"}]},
+    {"label": "Amazon Web Services", "kind": "skill", "aliases": [{"term": "AWS", "type": "abbr"}, "amazon cloud"]},
+    {"label": "Microsoft Azure", "kind": "skill", "aliases": ["azure", "azure cloud"]},
+    {"label": "Google Cloud Platform", "kind": "skill", "aliases": [{"term": "GCP", "type": "abbr"}, "google cloud"]},
+    {"label": "Terraform", "kind": "skill", "aliases": ["infrastructure as code", {"term": "IaC", "type": "abbr"}, "HCL"]},
+    {"label": "Continuous integration and delivery", "kind": "skill", "aliases": [{"term": "CI/CD", "type": "abbr"}, "ci cd", "build pipelines", "github actions", "jenkins"]},
+    {"label": "Site reliability engineering", "kind": "role", "aliases": [{"term": "SRE", "type": "abbr"}, "reliability engineer"]},
+    {"label": "Platform engineering", "kind": "role", "aliases": ["platform engineer", "devops", "dev ops", "infrastructure engineer"]},
+    {"label": "Machine learning", "kind": "skill", "aliases": [{"term": "ML", "type": "abbr"}, "deep learning", "pytorch", "tensorflow"]},
+    {"label": "PostgreSQL", "kind": "skill", "aliases": ["postgres", "psql", {"term": "PG", "type": "abbr"}]},
+    {"label": "Bengaluru", "kind": "place", "aliases": ["bangalore", {"term": "BLR", "type": "code"}]}
+  ]
+}

@@ -1,0 +1,157 @@
+[
+ {
+  "domain": "healthcare",
+  "query": "heart attack",
+  "relevant": [
+   "ED triage: heart attack suspected, chest pain for 2h, sweating",
+   "Discharge note post-MI on aspirin and statin",
+   "Acute STEMI, anterior wall, cath lab activated",
+   "NSTEMI, subsequent episode, troponin rising",
+   "Myocardial infarction history; cardiac rehab week 4"
+  ],
+  "must_not": [
+   "Sudden collapse, CPR given, ROSC after 6 min"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "heart attack in patients over 60",
+  "relevant": [
+   "Discharge note post-MI on aspirin and statin",
+   "NSTEMI, subsequent episode, troponin rising",
+   "Myocardial infarction history; cardiac rehab week 4",
+   "ED triage: heart attack suspected, chest pain for 2h, sweating"
+  ],
+  "must_not": [
+   "Acute STEMI, anterior wall, cath lab activated"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "high blood pressure",
+  "relevant": [
+   "Known HTN and T2DM, routine review, BP 150/95",
+   "High blood pressure, started amlodipine"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "stroke",
+  "relevant": [
+   "Left facial droop, slurred speech, CVA protocol"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "breathlessness",
+  "relevant": [
+   "SOB on exertion, COPD exacerbation, nebulised",
+   "Breathlessness and wheeze, inhaler technique reviewed"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "tylenol overdose",
+  "relevant": [
+   "Paracetamol overdose, NAC started"
+  ]
+ },
+ {
+  "domain": "healthcare",
+  "query": "knee ligament",
+  "relevant": [
+   "Right knee ACL tear after football, MRI booked"
+  ],
+  "must_not": [
+   "ACL 30 PCT BULK TK-4"
+  ]
+ },
+ {
+  "domain": "chemicals",
+  "query": "hydrochloric acid",
+  "relevant": [
+   "Hydrochloric acid 33% technical IBC",
+   "ACL 30 PCT BULK TK-4",
+   "Muriatic acid, drum 200 kg",
+   "HCl soln. 35% reagent grade",
+   "CAS 7647-01-0, dilute"
+  ],
+  "must_not": [
+   "Right knee ACL tear after football, MRI booked"
+  ]
+ },
+ {
+  "domain": "chemicals",
+  "query": "hydrocloric acid under 40%",
+  "relevant": [
+   "Hydrochloric acid 33% technical IBC",
+   "ACL 30 PCT BULK TK-4",
+   "Muriatic acid, drum 200 kg",
+   "HCl soln. 35% reagent grade",
+   "CAS 7647-01-0, dilute"
+  ]
+ },
+ {
+  "domain": "chemicals",
+  "query": "caustic soda",
+  "relevant": [
+   "Caustic soda flakes 25 kg bag",
+   "NaOH 48% solution"
+  ]
+ },
+ {
+  "domain": "chemicals",
+  "query": "wood alcohol",
+  "relevant": [
+   "Methyl alcohol 99.9%"
+  ]
+ },
+ {
+  "domain": "parts",
+  "query": "SS304 flange 2in",
+  "relevant": [
+   "Flange WN DN50 AISI304",
+   "Slip-on flange 2\" SS 304",
+   "Blind flange 50NB stainless 304"
+  ]
+ },
+ {
+  "domain": "parts",
+  "query": "gate valve",
+  "relevant": [
+   "Gate valve 1in SS316",
+   "Sluice valve DN25 marine grade"
+  ]
+ },
+ {
+  "domain": "tech",
+  "query": "react developer",
+  "relevant": [
+   "P. Nair"
+  ],
+  "note": "ReactJS/Reactjs rows join after their suggestions are approved"
+ },
+ {
+  "domain": "tech",
+  "query": "platform engineers in Pune",
+  "relevant": [
+   "A. Menon",
+   "L. Fernandes"
+  ]
+ },
+ {
+  "domain": "tech",
+  "query": "AWS",
+  "relevant": [
+   "L. Fernandes"
+  ]
+ },
+ {
+  "domain": "tech",
+  "query": "postgres",
+  "relevant": [
+   "P. Nair",
+   "T. Khan"
+  ]
+ }
+]

@@ -1,0 +1,16 @@
+Note ID,Summary,Diagnosis,Patient Age,Ward
+N-1001,"ED triage: heart attack suspected, chest pain for 2h, sweating",Chest pain; heart attack,67,Emergency
+N-1002,Discharge note post-MI on aspirin and statin,MI,72,Cardiology
+N-1003,"Acute STEMI, anterior wall, cath lab activated",STEMI,58,Cardiology
+N-1004,"NSTEMI, subsequent episode, troponin rising",NSTEMI,81,Cardiology
+N-1005,"AMI ruled out, troponin normal, reflux likely",Chest pain,44,Emergency
+N-1006,"Known HTN and T2DM, routine review, BP 150/95",HTN; T2DM,63,Outpatients
+N-1007,"Sudden collapse, CPR given, ROSC after 6 min",Cardiac arrest,70,ICU
+N-1008,"Right knee ACL tear after football, MRI booked",ACL tear,24,Orthopaedics
+N-1009,"Left facial droop, slurred speech, CVA protocol",CVA,77,Stroke unit
+N-1010,"SOB on exertion, COPD exacerbation, nebulised",COPD; SOB,69,Respiratory
+N-1011,"Fx distal radius after fall, cast applied",Fx,35,Orthopaedics
+N-1012,"Paracetamol overdose, NAC started",Paracetamol toxicity,19,Emergency
+N-1013,Myocardial infarction history; cardiac rehab week 4,Myocardial infarction,64,Rehab
+N-1014,"High blood pressure, started amlodipine",High blood pressure,52,Outpatients
+N-1015,"Breathlessness and wheeze, inhaler technique reviewed",Dyspnoea,61,Respiratory

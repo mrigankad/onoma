@@ -1,0 +1,22 @@
+# Python
+engine/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Local data
+*.db
+*.db-wal
+*.db-shm
+
+# Node
+web/node_modules/
+web/.next/
+web/.env*.local
+
+# OS
+.DS_Store
+Thumbs.db
+web/next-env.d.ts
+*.tsbuildinfo

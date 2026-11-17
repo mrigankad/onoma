@@ -1,0 +1,26 @@
+{
+  "name": "Open medical",
+  "description": "Lay terms mapped to clinical terms, with a few ICD-10 category codes as examples. Import licensed vocabularies (UMLS, SNOMED) yourself.",
+  "license": "CC-BY-4.0",
+  "entities": [
+    {"label": "Myocardial infarction", "kind": "condition", "codes": {"icd10": "I21"},
+     "aliases": ["heart attack", {"term": "MI", "type": "abbr"}, "cardiac infarct", "cardiac infarction", {"term": "STEMI", "type": "subtype"}, {"term": "NSTEMI", "type": "subtype"}]},
+    {"label": "Cardiac arrest", "kind": "condition", "codes": {"icd10": "I46"},
+     "aliases": ["heart stopped", "sudden cardiac arrest", {"term": "SCA", "type": "abbr"}]},
+    {"label": "Hypertension", "kind": "condition", "codes": {"icd10": "I10"},
+     "aliases": ["high blood pressure", {"term": "HTN", "type": "abbr"}, {"term": "HBP", "type": "abbr"}]},
+    {"label": "Type 2 diabetes mellitus", "kind": "condition", "codes": {"icd10": "E11"},
+     "aliases": ["type 2 diabetes", "adult onset diabetes", {"term": "T2DM", "type": "abbr"}, {"term": "DM2", "type": "abbr"}]},
+    {"label": "Cerebrovascular accident", "kind": "condition", "codes": {"icd10": "I63"},
+     "aliases": ["stroke", "brain attack", {"term": "CVA", "type": "abbr"}]},
+    {"label": "Chronic obstructive pulmonary disease", "kind": "condition", "codes": {"icd10": "J44"},
+     "aliases": [{"term": "COPD", "type": "abbr"}, "chronic bronchitis", "emphysema"]},
+    {"label": "Anterior cruciate ligament injury", "kind": "condition", "codes": {"icd10": "S83.5"},
+     "aliases": [{"term": "ACL tear", "type": "alias"}, {"term": "ACL", "type": "abbr"}, "torn knee ligament"]},
+    {"label": "Fracture", "kind": "condition", "aliases": ["broken bone", {"term": "fx", "type": "abbr"}]},
+    {"label": "Shortness of breath", "kind": "symptom", "aliases": ["breathlessness", {"term": "SOB", "type": "abbr"}, "dyspnea", "dyspnoea"]},
+    {"label": "Chest pain", "kind": "symptom", "aliases": ["angina", "chest tightness"]},
+    {"label": "Acetaminophen", "kind": "drug", "aliases": ["paracetamol", "tylenol", "crocin"]},
+    {"label": "Acetylsalicylic acid", "kind": "drug", "aliases": ["aspirin", {"term": "ASA", "type": "abbr"}]}
+  ]
+}

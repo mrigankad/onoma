@@ -1,0 +1,24 @@
+{
+  "name": "Industrial parts and chemicals",
+  "description": "Common chemicals, materials and pipe-size conventions used in plant inventories. CAS numbers are public identifiers.",
+  "license": "CC-BY-4.0",
+  "entities": [
+    {"label": "Hydrochloric acid", "kind": "chemical", "codes": {"cas": "7647-01-0"},
+     "aliases": [{"term": "HCl", "type": "formula"}, "muriatic acid", "spirits of salt", "hydrogen chloride solution"]},
+    {"label": "Sulfuric acid", "kind": "chemical", "codes": {"cas": "7664-93-9"},
+     "aliases": [{"term": "H2SO4", "type": "formula"}, "sulphuric acid", "oil of vitriol"]},
+    {"label": "Sodium hydroxide", "kind": "chemical", "codes": {"cas": "1310-73-2"},
+     "aliases": [{"term": "NaOH", "type": "formula"}, "caustic soda", "lye"]},
+    {"label": "Methanol", "kind": "chemical", "codes": {"cas": "67-56-1"},
+     "aliases": [{"term": "MeOH", "type": "formula"}, "methyl alcohol", "wood alcohol"]},
+    {"label": "Methyl tert-butyl ether", "kind": "chemical", "codes": {"cas": "1634-04-4"},
+     "aliases": [{"term": "MTBE", "type": "abbr"}]},
+    {"label": "Polyethylene", "kind": "material", "aliases": [{"term": "PE", "type": "abbr"}, "polythene", {"term": "HDPE", "type": "grade"}, {"term": "LDPE", "type": "grade"}]},
+    {"label": "Stainless steel 304", "kind": "material", "aliases": [{"term": "SS304", "type": "grade"}, "AISI 304", "ss 304", "18/8 stainless", "A2 stainless", "stainless 304", "304 stainless"]},
+    {"label": "Stainless steel 316", "kind": "material", "aliases": [{"term": "SS316", "type": "grade"}, "AISI 316", "ss 316", "marine grade stainless", "A4 stainless"]},
+    {"label": "DN50 pipe size", "kind": "size", "aliases": [{"term": "DN50", "type": "unit"}, {"term": "2in", "type": "unit"}, {"term": "2 inch", "type": "unit"}, {"term": "50NB", "type": "unit"}, {"term": "50 nb", "type": "unit"}]},
+    {"label": "DN25 pipe size", "kind": "size", "aliases": [{"term": "DN25", "type": "unit"}, {"term": "1in", "type": "unit"}, {"term": "1 inch", "type": "unit"}, {"term": "25NB", "type": "unit"}]},
+    {"label": "Flange", "kind": "part", "aliases": ["flanges", {"term": "WN flange", "type": "subtype"}, {"term": "slip-on flange", "type": "subtype"}, {"term": "blind flange", "type": "subtype"}]},
+    {"label": "Gate valve", "kind": "part", "aliases": ["sluice valve", {"term": "GV", "type": "abbr"}]}
+  ]
+}

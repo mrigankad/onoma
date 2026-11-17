@@ -1,0 +1,13 @@
+{
+  "name": "Retail and fashion",
+  "description": "UK and US product words, common abbreviations and category names.",
+  "license": "CC-BY-4.0",
+  "entities": [
+    {"label": "Sneakers", "kind": "category", "aliases": ["trainers", "running shoes", "athletic footwear", "kicks", "tennis shoes"]},
+    {"label": "Sweater", "kind": "category", "aliases": ["jumper", "pullover", "knitwear"]},
+    {"label": "Trousers", "kind": "category", "aliases": ["pants", "slacks", "chinos"]},
+    {"label": "Mobile phone", "kind": "category", "aliases": ["cell phone", "cellphone", "smartphone", "handset"]},
+    {"label": "Television", "kind": "category", "aliases": [{"term": "TV", "type": "abbr"}, "telly", "smart tv"]},
+    {"label": "Out of stock", "kind": "status", "aliases": [{"term": "OOS", "type": "abbr"}, "sold out", "unavailable"]}
+  ]
+}
