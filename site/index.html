@@ -67,6 +67,8 @@
   .head p { max-width: 380px; font-size: 16px; line-height: 25px; }
 
   .film { padding: 12px; }
+  .film { display: block; }
+  .tap { display: none; font-size: 13px; margin: 10px 4px 0; }
   .film img { width: 100%; display: block; border-radius: 20px; }
   .tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px; background: var(--surface); border-radius: 999px; width: fit-content; margin-bottom: 16px; }
   .tabs button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--muted); padding: 10px 18px; border-radius: 999px; cursor: pointer; }
@@ -103,7 +105,7 @@
   .term-box pre { font-family: inherit; white-space: pre; }
   .copy { margin-top: 14px; font: inherit; font-size: 13px; border: 0; background: #2E2E2E; color: #fff; border-radius: 999px; padding: 8px 14px; cursor: pointer; }
 
-  footer { padding: 88px 0 48px; }
+  footer.wrap { padding-top: 88px; padding-bottom: 48px; }
   .end { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 40px; flex-wrap: wrap; }
   .end h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.05; }
   .fine { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; font-size: 13px; flex-wrap: wrap; }
@@ -121,7 +123,25 @@
     .links a.text { display: none; }
     .steps { grid-template-columns: 1fr; }
     .graph .entity { width: 150px; right: 5%; } .graph .entity span { font-size: 17px; line-height: 21px; }
-    .graph .term { font-size: 16px; }
+    .graph { min-height: 340px; }
+    .graph .term { font-size: 15px; padding: 8px 14px; left: 5%; }
+    .graph .term.t1 { top: 12%; } .graph .term.t2 { top: 38%; } .graph .term.t3 { top: 64%; }
+    .graph .entity { width: 132px; right: 4%; top: 44%; padding: 14px; gap: 14px; }
+    .graph .entity span { font-size: 16px; line-height: 20px; }
+    .graph .entity small { font-size: 11px; white-space: nowrap; padding: 3px 8px; }
+    .graph .caption { left: 5%; right: 5%; bottom: 18px; font-size: 13px; }
+    .graph svg { display: none; }
+    .graph .term::after { content: ""; position: absolute; left: 100%; top: 50%; width: 18px; height: 2px; background: var(--blue); }
+    .graph .term.t3::after { background: var(--amber); }
+    .tabs { flex-wrap: nowrap; overflow-x: auto; width: 100%; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs button { flex-shrink: 0; }
+    .tap { display: block; }
+    .step { min-height: 0; }
+    .term-box { padding: 22px; font-size: 13px; }
+    .term-box pre { white-space: pre-wrap; word-break: break-all; }
+    .head { margin-bottom: 20px; }
+    section { padding-top: 56px; }
     .end { padding: 28px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -185,7 +205,8 @@
       <button role="tab" aria-selected="false" data-gif="packs" data-note="Start from open packs for healthcare, tech skills, industrial and retail. Export your own.">Packs</button>
     </div>
     <p class="tab-note muted" id="note">“heart attack in patients over 60” finds rows that only say NSTEMI, filters on age, and says why.</p>
-    <div class="card film"><img id="gif" src="media/search.gif" alt="Onoma console workflow" width="1000" height="625"></div>
+    <a class="card film" id="gif-link" href="media/search.gif" target="_blank" rel="noopener" aria-label="Open the GIF full size"><img id="gif" src="media/search.gif" alt="Onoma console workflow" width="1000" height="625"></a>
+    <p class="tap muted">Tap to open full size</p>
   </section>
 
   <section id="how">
@@ -269,6 +290,7 @@
   tabs.forEach((t) => t.addEventListener('click', () => {
     tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
     gif.src = 'media/' + t.dataset.gif + '.gif';
+    document.getElementById('gif-link').href = gif.src;
     note.textContent = t.dataset.note;
   }));
   document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {

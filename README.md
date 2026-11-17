@@ -1,33 +1,61 @@
 <div align="center">
 
-<img src="docs/media/hero.png" alt="onoma: many names, one meaning. Open-source search that knows ACL tear, MI and k8s are names for something." width="100%">
+<img src="docs/media/logo.svg" alt="" width="72">
+
+# onoma
+
+**Many names, one meaning.**<br>
+Open-source search that knows *ACL tear*, *MI* and *k8s* are names for something.
 
 [![CI](https://github.com/mrigankad/onoma/actions/workflows/ci.yml/badge.svg)](https://github.com/mrigankad/onoma/actions/workflows/ci.yml)
+[![Website](https://img.shields.io/badge/website-live-0B5CFF)](https://mrigankad.github.io/onoma/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-161616)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%2B-0B5CFF)](engine)
-[![MCP](https://img.shields.io/badge/MCP-3%20tools-0B5CFF)](#for-ai-agents-mcp)
-[![Search quality](https://img.shields.io/badge/nDCG%4010-1.00-161616)](#measured-not-guessed)
+[![Python](https://img.shields.io/badge/python-3.12%2B-0B5CFF?logo=python&logoColor=white)](engine)
+[![MCP](https://img.shields.io/badge/MCP-3%20tools-161616)](#for-ai-agents-mcp)
+[![nDCG@10](https://img.shields.io/badge/nDCG%4010-1.00-0B5CFF)](#measured-not-guessed)
+[![Stars](https://img.shields.io/github/stars/mrigankad/onoma?style=flat&color=D98A10)](https://github.com/mrigankad/onoma/stargazers)
 
-**Search for what a thing means, not what it is called.**
+[**Website**](https://mrigankad.github.io/onoma/) · [See it work](#see-it-work) · [How it works](#how-it-works) · [Quickstart](#quickstart) · [AI agents](#for-ai-agents-mcp) · [API](#api-v1) · [Roadmap](#roadmap)
 
-[Website](https://mrigankad.github.io/onoma/) · [See it work](#see-it-work) · [How it works](#how-it-works) · [Quickstart](#quickstart) · [AI agents](#for-ai-agents-mcp) · [API](#api-v1) · [Roadmap](#roadmap)
+<br>
+
+<img src="docs/media/hero.png" alt="Three names, ACL tear, torn knee ligament and S83.5, curving into one meaning: anterior cruciate ligament injury" width="100%">
 
 </div>
 
 <br>
 
 Every team names things differently: *heart attack*, *MI*, *STEMI*. *k8s* and *Kubernetes*. *HCl*, *muriatic acid*, and
-in one stock list, *ACL*. Keyword search misses them; vector search finds them but can't tell you why, and can't be
+in one stock list, *ACL*. Keyword search misses them. Vector search finds some, but can't tell you why and can't be
 corrected.
 
 Onoma keeps a **vocabulary people can see and fix**. Connect a spreadsheet or a table, teach it your words once, and
 every search, app and AI agent understands them. Every result explains why it matched.
 
+<div align="center">
+
+### Works with
+
+<a href="https://www.python.org"><img src="https://cdn.simpleicons.org/python/161616" height="28" alt="Python" title="Python"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://fastapi.tiangolo.com"><img src="https://cdn.simpleicons.org/fastapi/161616" height="28" alt="FastAPI" title="FastAPI"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://www.sqlite.org"><img src="https://cdn.simpleicons.org/sqlite/161616" height="28" alt="SQLite" title="SQLite"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://nextjs.org"><img src="https://cdn.simpleicons.org/nextdotjs/161616" height="28" alt="Next.js" title="Next.js"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://modelcontextprotocol.io"><img src="https://cdn.simpleicons.org/modelcontextprotocol/161616" height="28" alt="Model Context Protocol" title="Model Context Protocol"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://www.docker.com"><img src="https://cdn.simpleicons.org/docker/161616" height="28" alt="Docker" title="Docker"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://www.anthropic.com/claude"><img src="https://cdn.simpleicons.org/claude/161616" height="28" alt="Claude" title="Claude"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://ollama.com"><img src="https://cdn.simpleicons.org/ollama/161616" height="28" alt="Ollama" title="Ollama"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://gemini.google.com"><img src="https://cdn.simpleicons.org/googlegemini/161616" height="28" alt="Gemini" title="Gemini"></a>&nbsp;&nbsp;&nbsp;
+<a href="https://openid.net/connect/"><img src="https://cdn.simpleicons.org/openid/161616" height="28" alt="OpenID Connect" title="OpenID Connect"></a>
+
+<sub>Models are optional. Search, agents and review all run without one.</sub>
+
+</div>
+
 ## See it work
 
 <img src="docs/media/workflow.gif" alt="Onoma console: a search explained, ACL with two meanings, the review queue, the vocabulary graph and packs" width="100%">
 
-<sub>Recorded from the real console against the bundled demo data with <a href="https://github.com/mrigankad/AiEmcee">AiEmcee</a>. Nothing is mocked.</sub>
+<sub>Recorded from the real console on the bundled demo data with <a href="https://github.com/mrigankad/AiEmcee">AiEmcee</a>. Nothing is mocked.</sub>
 
 <table>
 <tr>
@@ -86,6 +114,32 @@ filter < 40.0%
     row says “muriatic acid”, a synonym of Hydrochloric acid · industrial pack
 ```
 
+## The agents
+
+Six small agents do the tedious part. They are rules first, use a model only if you configure one, and **can only
+write suggestions**. Nothing reaches the vocabulary without a person.
+
+<table>
+<tr>
+<td width="96" align="center"><img src="docs/media/art-flange.png" width="72" alt=""></td>
+<td><b>Schema Scout</b><br>Reads a new file and decides which columns are titles, vocabulary, numbers or free text. Detects emails and phone numbers and never stores them.</td>
+<td width="96" align="center"><img src="docs/media/art-converge.png" width="72" alt=""></td>
+<td><b>Alias Miner</b><br>Finds <i>k8s → Kubernetes</i>, <i>ReactJS → React</i>, initials and near spellings after every import, with the rows as evidence.</td>
+</tr>
+<tr>
+<td align="center"><img src="docs/media/art-heart.png" width="72" alt=""></td>
+<td><b>Query Interpreter</b><br>Fixes typos and turns <i>over 60</i>, <i>under 40%</i>, <i>more than 5 years</i> into filters on the right column.</td>
+<td align="center"><img src="docs/media/art-pack-tech.png" width="72" alt=""></td>
+<td><b>Sense Resolver</b><br>Knows a name can mean different things in different datasets, and keeps every meaning when you search across all of them.</td>
+</tr>
+<tr>
+<td align="center"><img src="docs/media/art-agent.png" width="72" alt=""></td>
+<td><b>Insights Analyst</b><br>Watches searches that found nothing and proposes the alias that would have fixed them, only if it actually returns rows.</td>
+<td align="center"><img src="docs/media/art-review.png" width="72" alt=""></td>
+<td><b>Review Copilot</b><br>Turns each suggestion into a card: the reason, sample rows, and the failed searches it would fix. One key to decide.</td>
+</tr>
+</table>
+
 ## Capabilities
 
 <img src="docs/media/capabilities.png" alt="Explained hits, scoped senses, MCP server, packs, measured quality, team ready" width="100%">
@@ -99,16 +153,26 @@ filter < 40.0%
 | --- | --- |
 | **Vocabulary graph** | Meanings with every name people use: synonyms, abbreviations, codes, units. Names can be scoped to one dataset. |
 | **Explained results** | Each hit lists the word, the alias, the source of that alias and any filter that let it through. |
-| **Query interpretation** | Typos are corrected; `over 60`, `under 40%`, `more than 5 years` become filters. |
-| **Agents** | Schema Scout, Alias Miner, Query Interpreter, Sense Resolver, Insights Analyst, Review Copilot. Rules first, models optional. They only ever write suggestions. |
 | **Review queue** | Same thing, different, or only in one dataset. Keyboard driven (A / R / S), every decision audited. |
 | **Data** | CSV, TSV, JSON and Excel (every sheet). Column roles are inferred; contact details are detected and never stored. |
 | **Packs** | Open medical, tech skills, industrial parts and chemicals, retail (CC-BY-4.0). Export your own and share it. |
-| **Meaning search** | Optional embeddings add rows that are close in meaning, labelled as such, below vocabulary matches. Search keeps working if the provider is down. |
+| **Meaning search** | Optional embeddings add rows close in meaning, labelled as such, below vocabulary matches. Search keeps working if the provider is down. |
 | **Accounts** | Built-in sign-in (scrypt, 12-hour sessions), viewer / steward / admin roles, OIDC single sign-on with PKCE, API keys. Open when no users exist. |
 | **Models** | None required. Ollama Cloud, OpenAI-compatible, Claude or Gemini through environment variables. |
 
 </details>
+
+## How it compares
+
+| | Keyword search | Synonym files | Vector search | **Onoma** |
+| --- | :-: | :-: | :-: | :-: |
+| Finds *NSTEMI* for “heart attack” | ✗ | ✓ | often | ✓ |
+| Says why a row matched | partly | ✗ | ✗ | ✓ |
+| One name, different meaning per dataset | ✗ | ✗ | ✗ | ✓ |
+| Finds new aliases in your data | ✗ | ✗ | ✗ | ✓ |
+| A person approves every change | n/a | by hand | ✗ | ✓ |
+| Works without a model | ✓ | ✓ | ✗ | ✓ |
+| Quality measured in CI | ✗ | ✗ | ✗ | ✓ |
 
 ## Quickstart
 
@@ -133,9 +197,14 @@ Or everything with Docker: `docker compose up`, then `docker compose exec engine
 
 ## For AI agents (MCP)
 
-`onoma mcp` runs an MCP server on stdio with three tools: `onoma_search`, `onoma_resolve` and `onoma_suggest_alias`.
-Agents search with the same vocabulary people curate; their proposals wait in the review queue and never go live on
-their own.
+`onoma mcp` runs an MCP server on stdio with three tools. Agents search with the same vocabulary people curate; their
+proposals wait in the review queue and never go live on their own.
+
+| Tool | Does |
+| --- | --- |
+| `onoma_search` | search in plain words, with the explanation trail |
+| `onoma_resolve` | every meaning and name for a term |
+| `onoma_suggest_alias` | propose a name for review (never applied directly) |
 
 ```json
 { "mcpServers": { "onoma": { "command": "onoma", "args": ["--db", "/path/to/onoma.db", "mcp"] } } }
@@ -160,7 +229,10 @@ onoma user-add you@team.org --role admin     # the first account turns sign-in o
 install packs, run agents and manage people. For single sign-on, set `ONOMA_OIDC_ISSUER`, `ONOMA_OIDC_CLIENT_ID` and
 `ONOMA_OIDC_REDIRECT`; new people join as viewers.
 
-## Configuration
+<details>
+<summary><b>Configuration</b></summary>
+
+<br>
 
 | Variable | Purpose |
 |---|---|
@@ -172,7 +244,12 @@ install packs, run agents and manage people. For single sign-on, set `ONOMA_OIDC
 | `ONOMA_OIDC_ISSUER` / `_CLIENT_ID` / `_CLIENT_SECRET` / `_REDIRECT` | single sign-on |
 | `ONOMA_OIDC_DEFAULT_ROLE` / `_ALLOWED_DOMAINS` | role for new SSO users, allowed email domains |
 
-## API (v1)
+</details>
+
+<details>
+<summary><b>API (v1)</b></summary>
+
+<br>
 
 | Method | Path | |
 |---|---|---|
@@ -189,6 +266,8 @@ install packs, run agents and manage people. For single sign-on, set `ONOMA_OIDC
 
 Full OpenAPI docs are served at `/docs`.
 
+</details>
+
 ## Layout
 
 ```
@@ -200,9 +279,23 @@ docs/     README media
 
 ## Roadmap
 
-- **v0.2** Postgres + pgvector team mode, connectors (Postgres, Google Sheets), embeddable search box.
-- **v1.0** pack registry, relevance test suites per workspace, multi-workspace hosting.
+- [x] Vocabulary graph, scoped senses, explained search
+- [x] Six agents, review queue, packs, export and import
+- [x] MCP server, eval harness in CI, optional embeddings
+- [x] Accounts, roles, OIDC single sign-on
+- [ ] Postgres + pgvector team mode
+- [ ] Connectors: Postgres tables, Google Sheets
+- [ ] Embeddable search box
+- [ ] Pack registry
+
+## Contributing
+
+Issues and pull requests are welcome. Run `pytest` and `onoma eval` in `engine/`, and `npx tsc --noEmit && npm run lint`
+in `web/`, before opening a PR. New packs are especially welcome: a pack is one JSON file in
+[`engine/onoma/packs`](engine/onoma/packs).
+
+<a href="https://star-history.com/#mrigankad/onoma&Date"><img src="https://api.star-history.com/svg?repos=mrigankad/onoma&type=Date" alt="Star history" width="100%"></a>
 
 ## License
 
-Apache-2.0. Packs are CC-BY-4.0.
+Apache-2.0. Packs are CC-BY-4.0. The name is Greek: ὄνομα, *name*.
