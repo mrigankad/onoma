@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onoma · Many names, one meaning</title>
+<meta name="description" content="Open-source search that knows ACL tear, MI and k8s are names for something. A vocabulary people can see and fix, and every result explains why it matched.">
+<meta property="og:title" content="Onoma · Many names, one meaning">
+<meta property="og:description" content="Open-source search with a vocabulary people can see and fix.">
+<meta property="og:image" content="https://mrigankad.github.io/onoma/media/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDEDED; --surface: #FFFFFF; --surface-2: #F4F4F4; --line: #E4E4E4;
+    --ink: #161616; --muted: #6B6B6B; --blue: #0B5CFF; --blue-tint: #E7EEFF;
+    --amber: #D98A10; --amber-tint: #FFF3DE; --amber-ink: #8A5A0B;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: Lexend, system-ui, sans-serif; font-weight: 400; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  code, pre { font-family: inherit; }
+  html, body { overflow-x: hidden; }
+  .hero > *, .grid > *, .steps > *, .code > * { min-width: 0; }
+  .tabs { max-width: 100%; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .display { font-weight: 300; letter-spacing: -0.035em; }
+  .muted { color: var(--muted); }
+  .card { background: var(--surface); border-radius: 28px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 11px 20px; font-size: 15px; transition: transform .15s ease, background .15s ease; }
+  .pill:hover { transform: translateY(-1px); }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.light { background: var(--surface); }
+  .pill.blue { background: var(--blue); color: #fff; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 999px; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; letter-spacing: -0.05em; }
+  .links { display: flex; gap: 6px; align-items: center; }
+  .links a.text { padding: 10px 14px; font-size: 14px; color: var(--muted); border-radius: 999px; }
+  .links a.text:hover { color: var(--ink); background: var(--surface); }
+
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 24px; padding: 56px 0 24px; align-items: stretch; }
+  .hero h1 { font-size: clamp(52px, 7.4vw, 96px); line-height: .98; }
+  .hero p.lead { font-size: 21px; line-height: 32px; font-weight: 300; max-width: 500px; margin: 28px 0 36px; }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .graph { position: relative; min-height: 460px; overflow: hidden; }
+  .graph svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .graph .term { position: absolute; left: 7%; font-size: 20px; padding: 10px 20px; border-radius: 999px; background: var(--surface-2); opacity: 0; animation: rise .6s ease forwards; }
+  .graph .term.t1 { top: 18%; animation-delay: .1s } .graph .term.t2 { top: 45%; animation-delay: .25s } .graph .term.t3 { top: 72%; animation-delay: .4s; background: var(--amber-tint); color: var(--amber); }
+  .graph .entity { position: absolute; right: 8%; top: 50%; transform: translateY(-50%); width: 190px; padding: 18px; border-radius: 24px; background: var(--blue); color: #fff; display: flex; flex-direction: column; gap: 22px; }
+  .graph .entity small { align-self: flex-start; font-size: 12px; border: 1px solid #ffffff66; padding: 4px 10px; border-radius: 999px; }
+  .graph .entity span { font-size: 21px; line-height: 25px; font-weight: 300; }
+  .graph path { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1.4s .5s ease forwards; }
+  .graph .caption { position: absolute; left: 7%; bottom: 26px; font-size: 14px; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  section { padding: 72px 0 0; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
+  .head h2 { font-size: clamp(36px, 4.4vw, 52px); line-height: 1.05; max-width: 680px; }
+  .head p { max-width: 380px; font-size: 16px; line-height: 25px; }
+
+  .film { padding: 12px; }
+  .film img { width: 100%; display: block; border-radius: 20px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px; background: var(--surface); border-radius: 999px; width: fit-content; margin-bottom: 16px; }
+  .tabs button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--muted); padding: 10px 18px; border-radius: 999px; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .tab-note { font-size: 16px; line-height: 25px; margin: 0 4px 16px; min-height: 25px; }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step { border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 250px; }
+  .step .n { width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; font-size: 14px; }
+  .step h3 { font-size: 24px; font-weight: 400; }
+  .step p { font-size: 15px; line-height: 23px; }
+  .s1 { background: var(--surface); } .s1 .n { background: var(--surface-2); } .s1 p { color: var(--muted); }
+  .s2 { background: var(--amber-tint); color: var(--amber); } .s2 .n { background: #fff; } .s2 p { color: var(--amber-ink); }
+  .s3 { background: var(--ink); color: #fff; } .s3 .n { background: #2E2E2E; } .s3 p { color: #BDBDBD; }
+  .s4 { background: var(--blue); color: #fff; } .s4 .n { background: #fff; color: var(--blue); } .s4 p { color: #D6E3FF; }
+
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .cap { padding: 30px; display: flex; flex-direction: column; gap: 14px; }
+  .cap .k { font-size: 13px; color: var(--blue); }
+  .cap h3 { font-size: 26px; line-height: 32px; font-weight: 300; letter-spacing: -0.02em; }
+  .cap p { font-size: 15px; line-height: 23px; color: var(--muted); }
+  .span3 { grid-column: span 3; } .span2 { grid-column: span 2; }
+  .why { display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 20px; background: var(--surface-2); font-size: 14px; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: var(--blue); margin-right: 10px; vertical-align: middle; }
+  .dot.a { background: var(--amber); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chips span { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: var(--surface-2); }
+  .chips span.b { background: var(--blue-tint); color: var(--blue); }
+  .cap.dark { background: var(--ink); color: #fff; } .cap.dark .k { color: #8FB1FF; } .cap.dark p { color: #BDBDBD; }
+
+  .code { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .term-box { background: var(--ink); color: #E8E8E8; border-radius: 28px; padding: 28px; font-size: 14px; line-height: 24px; overflow-x: auto; }
+  .term-box .c { color: #8C8C8C; } .term-box .p { color: #8FB1FF; }
+  .term-box pre { font-family: inherit; white-space: pre; }
+  .copy { margin-top: 14px; font: inherit; font-size: 13px; border: 0; background: #2E2E2E; color: #fff; border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+
+  footer { padding: 88px 0 48px; }
+  .end { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 40px; flex-wrap: wrap; }
+  .end h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.05; }
+  .fine { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; font-size: 13px; flex-wrap: wrap; }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; }
+    .graph { min-height: 380px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .span3, .span2 { grid-column: span 2; }
+    .code { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    .links a.text { display: none; }
+    .steps { grid-template-columns: 1fr; }
+    .graph .entity { width: 150px; right: 5%; } .graph .entity span { font-size: 17px; line-height: 21px; }
+    .graph .term { font-size: 16px; }
+    .end { padding: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .graph .term { opacity: 1; } .graph path { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Onoma home">
+      <svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="34" fill="#0B5CFF"/><path d="M30 34 C58 34 58 60 84 60M30 60 L84 60M30 86 C58 86 58 60 84 60" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="30" cy="34" r="8" fill="#fff"/><circle cx="30" cy="60" r="8" fill="#fff"/><circle cx="30" cy="86" r="8" fill="#fff"/><circle cx="86" cy="60" r="15" fill="#fff"/></svg>
+      onoma
+    </a>
+    <div class="links">
+      <a class="text" href="#see">See it work</a>
+      <a class="text" href="#how">How it works</a>
+      <a class="text" href="#start">Quickstart</a>
+      <a class="pill dark" href="https://github.com/mrigankad/onoma">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="hero">
+    <div style="display:flex;flex-direction:column;justify-content:center">
+      <h1 class="display">Many names,<br>one meaning.</h1>
+      <p class="lead muted">Open-source search that knows “ACL tear”, “MI” and “k8s” are names for something. A vocabulary people can see and fix, and every result explains why it matched.</p>
+      <div class="cta">
+        <a class="pill blue" href="#start">Get started</a>
+        <a class="pill light" href="https://github.com/mrigankad/onoma">Star on GitHub</a>
+        <a class="pill light" href="#mcp">Use it from AI agents</a>
+      </div>
+    </div>
+    <div class="card graph" aria-label="Three names linking to one meaning">
+      <svg viewBox="0 0 600 460" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M200 105 C300 105 330 230 420 230" fill="none" stroke="#0B5CFF" stroke-width="2"/>
+        <path d="M230 228 L420 230" fill="none" stroke="#0B5CFF" stroke-width="2"/>
+        <path d="M230 353 C320 353 330 230 420 230" fill="none" stroke="#D98A10" stroke-width="2" stroke-dasharray="6 6"/>
+      </svg>
+      <span class="term t1">“ACL tear”</span>
+      <span class="term t2">“torn knee lig.”</span>
+      <span class="term t3">“S83.5” · review</span>
+      <div class="entity"><small>entity · 5 names</small><span>Anterior cruciate ligament injury</span></div>
+      <span class="caption muted">Agents suggest. People approve. Search uses it right away.</span>
+    </div>
+  </div>
+
+  <section id="see">
+    <div class="head">
+      <h2 class="display">See it work</h2>
+      <p class="muted">Recorded from the real console on the bundled demo data. Nothing here is mocked.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Workflow">
+      <button role="tab" aria-selected="true" data-gif="search" data-note="“heart attack in patients over 60” finds rows that only say NSTEMI, filters on age, and says why.">Search</button>
+      <button role="tab" aria-selected="false" data-gif="senses" data-note="ACL is a ligament injury in clinical notes and hydrochloric acid in the parts list. Each row uses its own dataset’s meaning.">Two meanings</button>
+      <button role="tab" aria-selected="false" data-gif="review" data-note="The Alias Miner found k8s in CVs. One key approves it, and search uses it at once.">Review</button>
+      <button role="tab" aria-selected="false" data-gif="vocabulary" data-note="Every meaning with its synonyms, codes, products and pending suggestions.">Vocabulary</button>
+      <button role="tab" aria-selected="false" data-gif="packs" data-note="Start from open packs for healthcare, tech skills, industrial and retail. Export your own.">Packs</button>
+    </div>
+    <p class="tab-note muted" id="note">“heart attack in patients over 60” finds rows that only say NSTEMI, filters on age, and says why.</p>
+    <div class="card film"><img id="gif" src="media/search.gif" alt="Onoma console workflow" width="1000" height="625"></div>
+  </section>
+
+  <section id="how">
+    <div class="head">
+      <h2 class="display">From messy files to search that explains itself</h2>
+      <p class="muted">Four steps. Nothing goes live in the vocabulary until a person says yes.</p>
+    </div>
+    <div class="steps">
+      <div class="step s1"><span class="n">1</span><h3>Import</h3><p>CSV, Excel or JSON. Schema Scout finds the title, vocabulary and number columns, and skips personal data.</p></div>
+      <div class="step s2"><span class="n">2</span><h3>Agents suggest</h3><p>Alias Miner spots “k8s”, “ACL tear”, “HCl 35%”. Every suggestion carries its evidence.</p></div>
+      <div class="step s3"><span class="n">3</span><h3>People decide</h3><p>Same thing, different, or only in one dataset. One key each, and every decision is audited.</p></div>
+      <div class="step s4"><span class="n">4</span><h3>Search, explained</h3><p>In the console, over REST, or from any AI agent through MCP. Every hit says why it matched.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2 class="display">Built for the words your team actually uses</h2>
+    </div>
+    <div class="grid">
+      <div class="card cap span3">
+        <span class="k">Explained hits</span>
+        <h3>Every result says why it’s there</h3>
+        <div class="why">
+          <span><i class="dot"></i>“heart attack” means Myocardial infarction</span>
+          <span><i class="dot"></i>row says “NSTEMI”, a subtype · healthcare pack</span>
+          <span><i class="dot a"></i>Patient Age = 81 passes “over 60”</span>
+        </div>
+      </div>
+      <div class="card cap span3" style="justify-content:space-between">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span class="k">Scoped senses</span>
+          <h3>“ACL” is a ligament in clinic notes and an acid in the stock list</h3>
+        </div>
+        <div class="chips"><span class="b">Clinical Notes → ligament injury</span><span>Parts Stock → hydrochloric acid</span></div>
+      </div>
+      <div class="card cap span2" id="mcp"><span class="k">MCP server</span><h3>AI agents share the vocabulary</h3><p>Three tools: search, resolve, suggest. Agents can propose names but never approve them.</p></div>
+      <div class="card cap span2"><span class="k">Measured</span><h3>nDCG@10 of 1.0</h3><p>17 golden queries score every change, with a leak check. CI fails if quality drops.</p></div>
+      <div class="card cap span2 dark"><span class="k">Team ready</span><h3>Roles, SSO, audit log</h3><p>Viewer, steward, admin. OIDC with any provider. Any model provider, or none at all.</p></div>
+    </div>
+  </section>
+
+  <section id="start">
+    <div class="head">
+      <h2 class="display">Running in two minutes</h2>
+      <p class="muted">Python 3.12+ and uv for the engine, Node 20+ for the console. Or <code>docker compose up</code>.</p>
+    </div>
+    <div class="code">
+      <div class="term-box">
+<pre><span class="c"># engine</span>
+<span class="p">$</span> git clone https://github.com/mrigankad/onoma
+<span class="p">$</span> cd onoma/engine && uv venv && uv pip install -e .
+<span class="p">$</span> .venv/bin/onoma demo
+<span class="p">$</span> .venv/bin/onoma search "heart attack over 60"
+<span class="p">$</span> .venv/bin/onoma serve</pre>
+        <button class="copy" data-copy="git clone https://github.com/mrigankad/onoma && cd onoma/engine && uv venv && uv pip install -e . && .venv/bin/onoma demo">Copy</button>
+      </div>
+      <div class="term-box">
+<pre><span class="c"># any MCP client</span>
+{ "mcpServers": { "onoma": {
+    "command": "onoma",
+    "args": ["--db", "onoma.db", "mcp"]
+} } }</pre>
+        <button class="copy" data-copy='{ "mcpServers": { "onoma": { "command": "onoma", "args": ["--db", "onoma.db", "mcp"] } } }'>Copy</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="card end">
+    <h2 class="display">Teach it your words once.</h2>
+    <div class="cta"><a class="pill blue" href="https://github.com/mrigankad/onoma">Get Onoma on GitHub</a></div>
+  </div>
+  <div class="fine muted"><span>Onoma, from Greek ὄνομα, “name”. Apache-2.0, packs CC-BY-4.0.</span><a href="https://github.com/mrigankad/onoma/issues">Report an issue</a></div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const gif = document.getElementById('gif'), note = document.getElementById('note');
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    gif.src = 'media/' + t.dataset.gif + '.gif';
+    note.textContent = t.dataset.note;
+  }));
+  document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; }
+    catch { b.textContent = 'Select and copy'; }
+    setTimeout(() => (b.textContent = 'Copy'), 1600);
+  }));
+</script>
+</body>
+</html>

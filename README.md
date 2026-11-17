@@ -1,10 +1,80 @@
-# onoma
+<div align="center">
+
+<img src="docs/media/hero.png" alt="onoma: many names, one meaning. Open-source search that knows ACL tear, MI and k8s are names for something." width="100%">
+
+[![CI](https://github.com/mrigankad/onoma/actions/workflows/ci.yml/badge.svg)](https://github.com/mrigankad/onoma/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-Apache%202.0-161616)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.12%2B-0B5CFF)](engine)
+[![MCP](https://img.shields.io/badge/MCP-3%20tools-0B5CFF)](#for-ai-agents-mcp)
+[![Search quality](https://img.shields.io/badge/nDCG%4010-1.00-161616)](#measured-not-guessed)
 
 **Search for what a thing means, not what it is called.**
 
-Every team names things differently: *heart attack* / *MI* / *STEMI*, *k8s* / *Kubernetes*, *HCl* / *muriatic acid* / *ACL*.
-Onoma is an open-source search engine with a shared, editable vocabulary. Connect a spreadsheet or table, teach it
-your words once, and every search, app and AI agent understands them. Every result explains why it matched.
+[Website](https://mrigankad.github.io/onoma/) · [See it work](#see-it-work) · [How it works](#how-it-works) · [Quickstart](#quickstart) · [AI agents](#for-ai-agents-mcp) · [API](#api-v1) · [Roadmap](#roadmap)
+
+</div>
+
+<br>
+
+Every team names things differently: *heart attack*, *MI*, *STEMI*. *k8s* and *Kubernetes*. *HCl*, *muriatic acid*, and
+in one stock list, *ACL*. Keyword search misses them; vector search finds them but can't tell you why, and can't be
+corrected.
+
+Onoma keeps a **vocabulary people can see and fix**. Connect a spreadsheet or a table, teach it your words once, and
+every search, app and AI agent understands them. Every result explains why it matched.
+
+## See it work
+
+<img src="docs/media/workflow.gif" alt="Onoma console: a search explained, ACL with two meanings, the review queue, the vocabulary graph and packs" width="100%">
+
+<sub>Recorded from the real console against the bundled demo data with <a href="https://github.com/mrigankad/AiEmcee">AiEmcee</a>. Nothing is mocked.</sub>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Search in your own words**
+
+“heart attack in patients over 60” finds rows that say *NSTEMI*, filters on age, and says why.
+
+<img src="docs/media/search.gif" alt="Searching heart attack in patients over 60" width="100%">
+
+</td>
+<td width="50%" valign="top">
+
+**One name, two meanings**
+
+*ACL* is a ligament injury in clinical notes and hydrochloric acid in the parts list. Each row uses its own dataset's meaning.
+
+<img src="docs/media/senses.gif" alt="Searching ACL across datasets" width="100%">
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**Agents suggest, people approve**
+
+The Alias Miner found *k8s* in CVs. One key approves it, and search uses it at once.
+
+<img src="docs/media/review.gif" alt="Approving k8s as Kubernetes in the review queue" width="100%">
+
+</td>
+<td width="50%" valign="top">
+
+**Every name for a meaning**
+
+The vocabulary graph shows each meaning with its synonyms, codes, products and pending suggestions.
+
+<img src="docs/media/vocabulary.gif" alt="The Kubernetes meaning and its names" width="100%">
+
+</td>
+</tr>
+</table>
+
+## How it works
+
+<img src="docs/media/how-it-works.png" alt="Import, agents suggest, people decide, search explained" width="100%">
 
 ```
 $ onoma search "hydrocloric acid under 40%"
@@ -16,46 +86,46 @@ filter < 40.0%
     row says “muriatic acid”, a synonym of Hydrochloric acid · industrial pack
 ```
 
-## What it does
+## Capabilities
 
-- **Vocabulary graph.** Meanings (entities) with every name people use: synonyms, abbreviations, codes, units.
-  Names can be scoped: *ACL* is hydrochloric acid in the parts stock and a knee ligament in clinical notes.
-- **Explained results.** Each hit says which word, which alias and which decision made it match.
-- **Query interpretation.** Typos are corrected; `over 60`, `under 40%`, `more than 5 years` become filters.
-- **Agents that suggest, people who decide.** The Alias Miner finds `k8s → Kubernetes` and `ReactJS → React` on
-  import; the Insights Analyst turns failed searches into fixes. Nothing becomes an alias without a human decision.
-- **Rows, not documents.** CSV, TSV, JSON and Excel (every sheet). Column roles are inferred; contact details are
-  detected and never stored.
-- **Starter packs.** Open medical, tech skills, industrial parts and chemicals, retail (CC-BY-4.0).
-- **Meaning search (optional).** With an embedding model configured, rows close in meaning are added after
-  vocabulary matches and labelled as such. If the provider is down, search keeps working without it.
-- **Share vocabularies.** `onoma export` / `import-pack` (or the Packs screen) move your team's approved names
-  between installs, scopes included.
-- **Quality you can measure.** `onoma eval` scores search on golden queries and fails CI if quality drops.
-- **Sign-in and roles.** `onoma user-add you@team.org --role admin` turns accounts on (scrypt passwords,
-  12-hour sessions). Viewer searches, steward decides suggestions and uploads, admin installs packs and manages
-  users. The audit log records who did what. With no users it stays open for solo use.
-- **Works without an AI model.** Optional providers (Ollama Cloud, OpenAI-compatible, Claude, Gemini) via env vars.
+<img src="docs/media/capabilities.png" alt="Explained hits, scoped senses, MCP server, packs, measured quality, team ready" width="100%">
 
-## Run it
+<details>
+<summary><b>Every capability, in detail</b></summary>
+
+<br>
+
+| Area | What it does |
+| --- | --- |
+| **Vocabulary graph** | Meanings with every name people use: synonyms, abbreviations, codes, units. Names can be scoped to one dataset. |
+| **Explained results** | Each hit lists the word, the alias, the source of that alias and any filter that let it through. |
+| **Query interpretation** | Typos are corrected; `over 60`, `under 40%`, `more than 5 years` become filters. |
+| **Agents** | Schema Scout, Alias Miner, Query Interpreter, Sense Resolver, Insights Analyst, Review Copilot. Rules first, models optional. They only ever write suggestions. |
+| **Review queue** | Same thing, different, or only in one dataset. Keyboard driven (A / R / S), every decision audited. |
+| **Data** | CSV, TSV, JSON and Excel (every sheet). Column roles are inferred; contact details are detected and never stored. |
+| **Packs** | Open medical, tech skills, industrial parts and chemicals, retail (CC-BY-4.0). Export your own and share it. |
+| **Meaning search** | Optional embeddings add rows that are close in meaning, labelled as such, below vocabulary matches. Search keeps working if the provider is down. |
+| **Accounts** | Built-in sign-in (scrypt, 12-hour sessions), viewer / steward / admin roles, OIDC single sign-on with PKCE, API keys. Open when no users exist. |
+| **Models** | None required. Ollama Cloud, OpenAI-compatible, Claude or Gemini through environment variables. |
+
+</details>
+
+## Quickstart
 
 Engine (Python 3.12+, [uv](https://docs.astral.sh/uv/)):
 
 ```bash
-cd engine
+git clone https://github.com/mrigankad/onoma && cd onoma/engine
 uv venv && uv pip install -e ".[dev]"
 .venv/bin/onoma demo                 # packs + three sample datasets
 .venv/bin/onoma search "heart attack in patients over 60"
 .venv/bin/onoma serve                # API on http://127.0.0.1:8000  (docs at /docs)
-.venv/bin/python -m pytest           # 18 end-to-end tests
-.venv/bin/onoma eval                 # search quality on 17 golden queries (nDCG@10, recall, leaks)
 ```
 
 Console (Node 20+):
 
 ```bash
-cd web
-npm install
+cd web && npm install
 npm run dev                          # http://localhost:3000, talks to NEXT_PUBLIC_ONOMA_API
 ```
 
@@ -63,23 +133,44 @@ Or everything with Docker: `docker compose up`, then `docker compose exec engine
 
 ## For AI agents (MCP)
 
-`onoma mcp` runs an MCP server on stdio with three tools: `onoma_search`, `onoma_resolve` and
-`onoma_suggest_alias`. Agents search with the same vocabulary people curate; their alias proposals wait in the
-review queue and never go live on their own.
+`onoma mcp` runs an MCP server on stdio with three tools: `onoma_search`, `onoma_resolve` and `onoma_suggest_alias`.
+Agents search with the same vocabulary people curate; their proposals wait in the review queue and never go live on
+their own.
 
 ```json
 { "mcpServers": { "onoma": { "command": "onoma", "args": ["--db", "/path/to/onoma.db", "mcp"] } } }
 ```
+
+## Measured, not guessed
+
+`onoma eval` runs 17 golden queries across healthcare, chemicals, parts and hiring, and scores them with nDCG@10,
+recall and a leak check (no row from the wrong meaning or dataset). CI fails if quality drops.
+
+```
+17 queries · nDCG@10 1.0 · recall 1.0 · leaks 0
+```
+
+## Teams
+
+```bash
+onoma user-add you@team.org --role admin     # the first account turns sign-in on
+```
+
+**Viewers** search and browse. **Stewards** also decide suggestions, edit names and upload data. **Admins** also
+install packs, run agents and manage people. For single sign-on, set `ONOMA_OIDC_ISSUER`, `ONOMA_OIDC_CLIENT_ID` and
+`ONOMA_OIDC_REDIRECT`; new people join as viewers.
 
 ## Configuration
 
 | Variable | Purpose |
 |---|---|
 | `ONOMA_DB` | SQLite file (default `onoma.db`) |
-| `ONOMA_API_KEYS` | comma-separated keys; when set, every `/v1` call except health needs `X-API-Key` |
+| `ONOMA_API_KEYS` | comma-separated keys accepted as `X-API-Key` or a Bearer token |
 | `ONOMA_CORS` | allowed console origins |
 | `ONOMA_MODEL_PROVIDER` / `_NAME` / `_URL` / `_KEY` | optional model: `ollama`, `openai`, `anthropic`, `gemini` |
-| `ONOMA_EMBED_MODEL` | embedding model for meaning search (ollama, openai or gemini providers) |
+| `ONOMA_EMBED_MODEL` | embedding model for meaning search (ollama, openai or gemini) |
+| `ONOMA_OIDC_ISSUER` / `_CLIENT_ID` / `_CLIENT_SECRET` / `_REDIRECT` | single sign-on |
+| `ONOMA_OIDC_DEFAULT_ROLE` / `_ALLOWED_DOMAINS` | role for new SSO users, allowed email domains |
 
 ## API (v1)
 
@@ -93,17 +184,25 @@ review queue and never go live on their own.
 | POST | `/v1/suggestions/:id/decision` | `same` · `different` · `scope` |
 | GET | `/v1/insights` | failed searches and stats |
 | GET/POST | `/v1/packs` | list and install packs |
+| GET/POST | `/v1/vocabulary/export` · `/import` | move a vocabulary between installs |
+| POST | `/v1/auth/login` · `/v1/auth/oidc/*` | sign in |
+
+Full OpenAPI docs are served at `/docs`.
 
 ## Layout
 
 ```
-engine/   Python core: storage (SQLite FTS5), vocabulary, ingest, search, agents, API, CLI
-web/      Next.js console: Home, Search, Review queue, Vocabulary, Data, Packs, Insights
+engine/   Python core: SQLite FTS5 storage, vocabulary, ingest, search, agents, auth, API, CLI, MCP
+web/      Next.js console: Home, Search, Review, Vocabulary, Packs, Data, Insights, Settings, Users
+site/     the project website (GitHub Pages)
+docs/     README media
 ```
 
 ## Roadmap
 
-v0.2 Postgres + pgvector team mode, OIDC sign-in, user management screen.
-v1.0 connectors, embeddable search box, relevance test suites in CI, pack registry.
+- **v0.2** Postgres + pgvector team mode, connectors (Postgres, Google Sheets), embeddable search box.
+- **v1.0** pack registry, relevance test suites per workspace, multi-workspace hosting.
 
-Licence: Apache-2.0.
+## License
+
+Apache-2.0. Packs are CC-BY-4.0.
